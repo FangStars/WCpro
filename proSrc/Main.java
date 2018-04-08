@@ -11,7 +11,7 @@ public class Main {
         if(args.length<1){
             throw new IllegalArgumentException("请输入足够的参数");
         }
-        if(args[args.length-1].indexOf("txt")==-1)
+        if(!args[args.length-1].endsWith(".txt"))
         {
         	throw new IllegalArgumentException("请输入txt文件");
         }
