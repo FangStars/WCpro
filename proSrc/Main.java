@@ -9,46 +9,46 @@ import java.util.TreeMap;
 public class Main {
 	public static void main(String[] args)throws Exception {
         if(args.length<1){
-            throw new IllegalArgumentException("è¯·è¾“å…¥è¶³å¤Ÿçš„å‚æ•°");
+            throw new IllegalArgumentException("ÇëÊäÈë×ã¹»µÄ²ÎÊı");
         }
-        if(args[args.length-1].indexOf(".txt")==-1)
+        if(!args[args.length-1].endsWith(".txt"))
         {
-        	throw new IllegalArgumentException("è¯·è¾“å…¥txtæ–‡ä»¶");
+        	throw new IllegalArgumentException("ÇëÊäÈëtxtÎÄ¼ş");
         }
-        String filepath=null;//é»˜è®¤è¢«ç»Ÿè®¡æ–‡ä»¶è·¯å¾„
-        String outpath="result.txt";//é»˜è®¤ç»“æœä¿å­˜è·¯å¾„
-        filepath=args[args.length-1];//è¢«ç»Ÿè®¡æ–‡ä»¶è·¯å¾„
+        String filepath=null;//Ä¬ÈÏ±»Í³¼ÆÎÄ¼şÂ·¾¶
+        String outpath="result.txt";//Ä¬ÈÏ½á¹û±£´æÂ·¾¶
+        filepath=args[args.length-1];//±»Í³¼ÆÎÄ¼şÂ·¾¶
         Map<String, Integer> sum=scan(filepath);
-        String res=SortMap(sum);    //æŒ‰å€¼è¿›è¡Œæ’åº
+        String res=SortMap(sum);    //°´Öµ½øĞĞÅÅĞò
         writetxt(res,outpath);
         
 	}
 	public static Map<String, Integer> scan(String path)throws IOException
 	{
-		//è¯»å–æ–‡æ¡£å¹¶å°†æ‰€æœ‰å•è¯æ”¾å…¥listå¹¶ç»Ÿè®¡
+		//¶ÁÈ¡ÎÄµµ²¢½«ËùÓĞµ¥´Ê·ÅÈëlist²¢Í³¼Æ
         InputStreamReader isr = new InputStreamReader(new FileInputStream(path));
         BufferedReader br = new BufferedReader(isr);
         String str=null;
-        List<String> lists = new ArrayList<String>();  //å­˜å‚¨è¿‡æ»¤åå•è¯çš„åˆ—è¡¨  
+        List<String> lists = new ArrayList<String>();  //´æ´¢¹ıÂËºóµ¥´ÊµÄÁĞ±í  
         while((str=br.readLine())!=null){
            // String[] tmp= str.split(" |,|'");
-            String[] tmp = str.split("[^a-zA-Z-]");  //è¿‡æ»¤å‡ºåªå«æœ‰å­—æ¯çš„
+            String[] tmp = str.split("[^a-zA-Z-]");  //¹ıÂË³öÖ»º¬ÓĞ×ÖÄ¸µÄ
             for(int i=0;i<tmp.length;i++){
                 if(tmp[i].length()!=0)
                 {
-                	//æœ€åå¸¦çŸ­æ¨ªçº¿çš„ä½†æœªé“¾æ¥çš„å•è¯å»æ‰çŸ­çº¿
+                	//×îºó´ø¶ÌºáÏßµÄµ«Î´Á´½ÓµÄµ¥´ÊÈ¥µô¶ÌÏß
                 	if((tmp[i].substring(tmp[i].length()-1, tmp[i].length())).equals("-"))
                 	{
-                		if(tmp[i].length()!=1)//é¿å…å•ä¸ªæ¨ªçº¿æ—¶è¾“å‡ºç©ºå­—ç¬¦
+                		if(tmp[i].length()!=1)//±ÜÃâµ¥¸öºáÏßÊ±Êä³ö¿Õ×Ö·û
                 		{
                     		lists.add(tmp[i].substring(0, tmp[i].length()-1)); 
                             //System.out.println(tmp[i].substring(0, tmp[i].length()-1));
                 		}
                 	}
-                	//ç¬¬ä¸€ä¸ªå¸¦çŸ­æ¨ªçº¿çš„ä½†æœªé“¾æ¥çš„å•è¯å»æ‰çŸ­çº¿
+                	//µÚÒ»¸ö´ø¶ÌºáÏßµÄµ«Î´Á´½ÓµÄµ¥´ÊÈ¥µô¶ÌÏß
                 	else if((tmp[i].substring(0,1)).equals("-"))
                 	{
-                		if(tmp[i].length()!=1)//é¿å…å•ä¸ªæ¨ªçº¿æ—¶è¾“å‡ºç©ºå­—ç¬¦
+                		if(tmp[i].length()!=1)//±ÜÃâµ¥¸öºáÏßÊ±Êä³ö¿Õ×Ö·û
                 		{
                     		lists.add(tmp[i].substring(1, tmp[i].length())); 
                 		}
@@ -62,8 +62,8 @@ public class Main {
             }
         }  
         isr.close();
-        Map<String, Integer> wordsCount = new TreeMap<String,Integer>();  //å­˜å‚¨å•è¯è®¡æ•°ä¿¡æ¯ï¼Œkeyå€¼ä¸ºå•è¯ï¼Œvalueä¸ºå•è¯æ•°      
-        //å•è¯çš„è¯é¢‘ç»Ÿè®¡    
+        Map<String, Integer> wordsCount = new TreeMap<String,Integer>();  //´æ´¢µ¥´Ê¼ÆÊıĞÅÏ¢£¬keyÖµÎªµ¥´Ê£¬valueÎªµ¥´ÊÊı      
+        //µ¥´ÊµÄ´ÊÆµÍ³¼Æ    
         for (String li : lists) {    
             if(wordsCount.get(li) != null){    
                 wordsCount.put(li,wordsCount.get(li) + 1);    
@@ -74,7 +74,7 @@ public class Main {
         }
         return wordsCount;
 	}
-    //æŒ‰valueçš„å¤§å°è¿›è¡Œæ’åº    
+    //°´valueµÄ´óĞ¡½øĞĞÅÅĞò    
     public static String SortMap(Map<String,Integer> oldmap){    
             
         ArrayList<Map.Entry<String,Integer>> list = new ArrayList<Map.Entry<String,Integer>>(oldmap.entrySet());    
@@ -82,7 +82,7 @@ public class Main {
         Collections.sort(list,new Comparator<Map.Entry<String,Integer>>(){    
             @Override    
             public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {    
-                return o2.getValue() - o1.getValue();  //é™åº    
+                return o2.getValue() - o1.getValue();  //½µĞò    
             }    
         });    
         StringBuilder p=new StringBuilder();
@@ -95,7 +95,7 @@ public class Main {
     }
     public static void writetxt(String res,String path) throws IOException
     {
-    	//è¾“å‡ºåˆ°æ–‡æœ¬
+    	//Êä³öµ½ÎÄ±¾
     	File myFile=new File(path);
     	BufferedWriter out = new BufferedWriter(new FileWriter(myFile));
         out.write(res);
